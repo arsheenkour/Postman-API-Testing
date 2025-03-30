@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "c2d4b925-ce2a-4f2a-9eb1-b087322ebc6c",
+		"name": "exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39835901"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validate the status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Validate the response time\r",
+							"pm.test(\"Response time is less than 100ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+							"});\r",
+							"\r",
+							"// Validate the content of address\r",
+							"pm.test(\"Address content is correct\", function () {\r",
+							"    var responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody['user-information']['address']).to.eql({\r",
+							"        \"streetno\": 90,\r",
+							"        \"city\": \"jalandhar\",\r",
+							"        \"state\": \"punjab\",\r",
+							"        \"postalcode\": 144111,\r",
+							"        \"country\": \"India\"\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Validate the total amount\r",
+							"pm.test(\"Total amount is correct\", function () {\r",
+							"    var responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody['Payment Details']['amount']).to.equal(123.9);\r",
+							"});\r",
+							"\r",
+							"// Validate the Card number\r",
+							"pm.test(\"Card number is correct\", function () {\r",
+							"    var responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody['paymentmethoddetails']['cardNumber']).to.equal(17286367467324);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": \"1\",\r\n        \"Payment Details\": {\r\n            \"amount\": 123.9,\r\n            \"currency\": \"USD\",\r\n            \"paymentMethod\": \"CreditCard\",\r\n            \"transcationid\": 46474,\r\n            \"paymentStatus\": \"Completed\",\r\n            \"paymentDate\": \"12-03-2025\",\r\n            \"gateway\": \"PayPal\",\r\n            \"taxamount\": 567.9\r\n        },\r\n        \"user-information\": {\r\n            \"user-id\": 36455,\r\n            \"firstName\": \"Arsheen\",\r\n            \"lastName\": \"Kour\",\r\n            \"email\": \"arsheenkour@gmail.com\",\r\n            \"phone\": 9122836698,\r\n            \"address\": {\r\n                \"streetno\": 90,\r\n                \"city\": \"jalandhar\",\r\n                \"state\": \"punjab\",\r\n                \"postalcode\": 144111,\r\n                \"country\": \"India\"\r\n            }\r\n        },\r\n        \"transcationmetadata\": {\r\n            \"transcationtype\": \"purchase\",\r\n            \"device\": \"desktop\",\r\n            \"location\": {\r\n                \"streetno\": 91,\r\n                \"city\": \"kanpur\",\r\n                \"state\": \"uttarpardesh\",\r\n                \"postalcode\": 19807,\r\n                \"country\": \"India\"\r\n            }\r\n        },\r\n        \"billinginformation\": {\r\n            \"billingname\": \"Arsheen Kour\",\r\n            \"billingaddress\": {\r\n                \"streetno\": 90,\r\n                \"city\": \"jalandhar\",\r\n                \"state\": \"punjab\",\r\n                \"postalcode\": 144111,\r\n                \"country\": \"India\"\r\n            },\r\n            \"billingphone\": 9122836698,\r\n            \"bilingemail\": \"arsheenkour47@gmail.com\",\r\n            \"billingstatus\": \"verified\"\r\n        },\r\n        \"paymentmethoddetails\": {\r\n            \"methodtype\": \"PayPal\",\r\n            \"cardNumber\": 17286367467324,\r\n            \"cardExpiryDate\": \"12-03-2030\",\r\n            \"cardholdername\": \"Arsheen Kour\",\r\n            \"cvv\": \"AK678\"\r\n        }\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
